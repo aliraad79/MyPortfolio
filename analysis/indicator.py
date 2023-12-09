@@ -27,7 +27,6 @@ def add_macd(df, fast=12, slow=26, signal=9):
 
 
 def add_ichimoku_cloud(df):
-    ta.ichimoku()
     df.ta.ichimoku(append=True)
 
 
