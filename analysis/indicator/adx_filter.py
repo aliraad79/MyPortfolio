@@ -7,7 +7,7 @@ import pandas as pd
 class ADXFilter(IndicatorFilter):
     def run_filter(self, stock_name: str, stock_df: pd.DataFrame):
         add_adx(stock_df)
-        if stock_df["ADX_14"][-1] > 25:
+        if stock_df["ADX_14"].iloc[-1] > 25:
             if self.verbose:
                 print(f"Good movement has found in {stock_name}")
             return (stock_name, stock_df)
