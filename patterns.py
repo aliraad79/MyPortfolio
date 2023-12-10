@@ -17,7 +17,9 @@ patterns = find_patterns(prices)
 
 for name, lis in patterns.items():
     print(f"For pattern {name}")
-    for pattern_point in [(dates.iloc[int(j[0])], dates.iloc[int(j[1])]) for j in lis]:
-        plot_df_with_pattern(df, pattern_point[0], pattern_point[1])
+    
+    pattern_points = [(dates.iloc[int(j[0])], dates.iloc[int(j[1])]) for j in lis]
+    
+    plot_df_with_pattern(df, pattern_points)
 
 

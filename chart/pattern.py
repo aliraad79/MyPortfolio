@@ -1,8 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import random
+import matplotlib.colors as mcolors
 
 
-def plot_df_with_pattern(df, start_point, end_point):
+def plot_df_with_pattern(df, points):
     fig, ax = plt.subplots(figsize=(16, 4))
     ax.plot(df.index, df['close'])
     
@@ -13,5 +15,6 @@ def plot_df_with_pattern(df, start_point, end_point):
     ax.set_title("Stock Price", size=15)
     
     # highlight a time range
-    ax.axvspan(start_point, end_point, color="blue", alpha=0.3)
+    for start_point, end_point in points:
+        ax.axvspan(start_point, end_point, color=random.choice(list(mcolors.CSS4_COLORS.values())), alpha=0.3)
     plt.show()
