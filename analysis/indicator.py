@@ -30,6 +30,13 @@ def add_ichimoku_cloud(df):
     df.ta.ichimoku(append=True)
 
 
+def add_smas(df):
+    add_sma(df, 5)
+    add_sma(df)
+    add_sma(df, 20)
+    add_sma(df, 50)
+
+
 def add_my_indicators(df):
     add_bbands(df)
     add_sma(df)
