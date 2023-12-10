@@ -1,5 +1,5 @@
-from analysis.indicator import add_adx
-from analysis.indicator_filter import IndicatorFilter
+from .indicator import add_adx
+from .indicator_filter import IndicatorFilter
 
 import pandas as pd
 

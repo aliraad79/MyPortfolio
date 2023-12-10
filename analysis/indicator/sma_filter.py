@@ -1,5 +1,5 @@
-from analysis.indicator import add_smas
-from analysis.indicator_filter import IndicatorFilter
+from .indicator import add_smas
+from .indicator_filter import IndicatorFilter
 
 import pandas as pd
 
