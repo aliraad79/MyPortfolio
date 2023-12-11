@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from datetime import date
 
 
 class DataRow:
@@ -11,6 +12,17 @@ class DataRow:
 
     def __repr__(self) -> str:
         return f"<{self.symbol}, {self.time}, {self.forecast}, {self.actual}>"
+
+    def to_csv(self) -> str:
+        return f"{self.symbol},{self.time},{self.actual},{self.forecast}"
+
+
+def write_to_csv(datas):
+    current_date = date.today()
+    with open(f"../MyData/forexFactory/{current_date}.csv", "w+") as file:
+        file.write(",Symbol,Time,Actual,ForeCast\n")
+        for idx, data_row in enumerate(datas):
+            file.write(f"{idx},{data_row.to_csv()}\n")
 
 
 BASE_URL = "https://www.forexfactory.com/"
@@ -41,4 +53,4 @@ for row in table.find_all("tr")[4:]:
     time = row.find("td", attrs={"class": "calendar__cell calendar__time"}).text
     datas.append(DataRow(forecast, symbol, actual, time))
 
-print(datas)
+write_to_csv(datas)
