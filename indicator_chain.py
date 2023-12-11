@@ -3,8 +3,6 @@ from analysis.indicator import SmallDataFilter, SMAFilter, IchimokuFilter, ADXFi
 
 # download.download_and_save_all_data()
 
-df = read.read_stock_as_pandas("وتجارت")["2020":]
-
 # indicator.add_my_indicators(df)
 all_stock = read.read_all_stocks()
 

@@ -1,5 +1,4 @@
 import pandas_ta as ta
-from MyData.read import read_stock_as_pandas
 
 
 def add_bbands(df):
@@ -35,16 +34,3 @@ def add_smas(df):
     add_sma(df)
     add_sma(df, 20)
     add_sma(df, 50)
-
-
-def add_my_indicators(df):
-    add_bbands(df)
-    add_sma(df)
-    add_sma(df, 20)
-    add_rsi(df)
-
-    add_adx(df)
-    add_cci(df)
-
-    add_macd(df)
-    add_ichimoku_cloud(df)
