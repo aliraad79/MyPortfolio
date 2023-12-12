@@ -3,7 +3,7 @@ from analysis.indicator import SmallDataFilter, SMAFilter, IchimokuFilter, ADXFi
 
 
 def get_indicator_filtered_stocks():
-    all_stock = read.read_all_stocks()
+    all_stock = read.read_all_iran_stocks()
 
     # Start chain of filters
     start_of_chain = SmallDataFilter()

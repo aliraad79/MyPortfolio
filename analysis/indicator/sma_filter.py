@@ -1,4 +1,4 @@
-from .indicator import add_smas
+from .indicators import add_smas
 from .indicator_filter import IndicatorFilter
 
 import pandas as pd

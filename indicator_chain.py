@@ -1,10 +1,9 @@
 from MyData import download, read
 from analysis.indicator import SmallDataFilter, SMAFilter, IchimokuFilter, ADXFilter
 
-# download.download_and_save_all_data()
+# download.download_and_save_all_iran_sotck_data()
 
-# indicator.add_my_indicators(df)
-all_stock = read.read_all_stocks()
+all_stock = read.read_all_iran_stocks()
 
 # Start chain of filters
 small_data_fil = SmallDataFilter()

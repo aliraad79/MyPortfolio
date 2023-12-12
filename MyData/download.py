@@ -4,30 +4,31 @@ import yfinance as yfin
 import pandas as pd
 
 
-DATA_PATH = "MyData/ISM"
+IRAN_STOCK_DATA_PATH = "MyData/ISM"
+CRYPTO_DATA_PATH = "MyData/crypto"
 
 
-def download_and_save_all_data():
-    download("all", write_to_csv=True, base_path=DATA_PATH)
+def download_and_save_all_iran_sotck_data():
+    download("all", write_to_csv=True, base_path=IRAN_STOCK_DATA_PATH)
 
 
-def download_and_save(stock_name):
-    download(stock_name, write_to_csv=True, base_path=DATA_PATH)
+def download_and_save_iran_sotck(stock_name):
+    download(stock_name, write_to_csv=True, base_path=IRAN_STOCK_DATA_PATH)
 
 
-def download_and_save_stock_index():
+def download_and_save__iran_stock_index():
     download_financial_indexes(
-        symbols="شاخص کل", write_to_csv=True, base_path=DATA_PATH
+        symbols="شاخص کل", write_to_csv=True, base_path=IRAN_STOCK_DATA_PATH
     )
 
 
-def download_coin_daily() -> pd.DataFrame:
+def download_crypto_daily(coin_symbol:str) -> pd.DataFrame:
     yfin.pdr_override()
 
-    return pdr.get_data_yahoo("BTC-USD", start="2020-01-01", end="2023-12-01")
+    return pdr.get_data_yahoo(coin_symbol, start="2020-01-01", end="2023-12-01")
 
 
-def download_and_save_coin_daily():
-    data = download_coin_daily()
-    data.to_csv(f"{DATA_PATH}/BTCUSDT.csv")
+def download_and_save_crypto_daily(coin_symbol:str):
+    data = download_crypto_daily(coin_symbol)
+    data.to_csv(f"{CRYPTO_DATA_PATH}/BTCUSD.csv")
     return data

@@ -1,4 +1,4 @@
-from .indicator import add_ichimoku_cloud
+from .indicators import add_ichimoku_cloud
 from .indicator_filter import IndicatorFilter
 
 import pandas as pd

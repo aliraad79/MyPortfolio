@@ -1,4 +1,4 @@
-from .indicator import add_adx
+from .indicators import add_adx
 from .indicator_filter import IndicatorFilter
 
 import pandas as pd

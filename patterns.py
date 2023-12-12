@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 
-df = read.read_stock_as_pandas("وتجارت")["2021":]
+df = read.read_iran_stock_as_pandas("وتجارت")["2021":]
 
 prices = pd.Series(data=df["close"].values)
 prices.index = np.linspace(1, len(prices), len(prices))
