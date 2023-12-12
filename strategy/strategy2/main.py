@@ -1,6 +1,8 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from MyData.read import read_all_iran_stocks, read_sample_iran_stocks
+from MyData.read import read_all_iran_stocks
+from MyData.download import download_and_save_all_iran_sotck_data
+
 from analysis.indicator import SmallDataFilter
 from chart.randomForest import plot_df
 import pandas as pd
@@ -10,6 +12,7 @@ N = 0.80
 
 
 def main():
+    download_and_save_all_iran_sotck_data()
     dfs = read_all_iran_stocks()
 
     small_data_fil = SmallDataFilter()
@@ -30,7 +33,6 @@ def main():
 
     scores.sort(key=lambda x: x[1])
     scores = pd.DataFrame(scores, columns=["name", "score"])
-    print(scores)
 
     print("Mean of scores: ", scores.score.mean())
     print("Std of scores: ", scores.score.std())

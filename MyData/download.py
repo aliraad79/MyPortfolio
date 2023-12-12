@@ -14,7 +14,7 @@ def download_and_save_iran_sotck(stock_name):
     download(stock_name, write_to_csv=True, base_path=IRAN_STOCK_DATA_PATH)
 
 
-def download_and_save__iran_stock_index():
+def download_and_save_iran_stock_index():
     download_financial_indexes(
         symbols="شاخص کل", write_to_csv=True, base_path=IRAN_STOCK_DATA_PATH
     )
@@ -43,3 +43,10 @@ def download_and_save_brent_crude_oil_daily():
     data.to_csv(f"{OIL_DATA_PATH}/BR.csv")
     print(data)
     return data
+
+
+def update_all_datas():
+    download_and_save_all_iran_sotck_data()
+    download_and_save_iran_stock_index()
+    download_and_save_crypto_daily()
+    download_and_save_brent_crude_oil_daily()
