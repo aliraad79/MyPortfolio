@@ -37,6 +37,6 @@ def read_crypto_data(coin: str = "BTCUSDT", _from="2020") -> pd.DataFrame:
     return _convert_yfianace_data_to_standard_format(df)[_from:]
 
 def read_brent_crude_oil_daily(_from="2020") -> pd.DataFrame:
-    df = pd.read_csv(f"{OIL_DATA_PATH}/BZ=F.csv")
+    df = pd.read_csv(f"{OIL_DATA_PATH}/BR.csv")
 
     return _convert_yfianace_data_to_standard_format(df)[_from:]

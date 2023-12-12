@@ -3,10 +3,7 @@ import pandas_datareader.data as pdr
 import yfinance as yfin
 import pandas as pd
 
-
-IRAN_STOCK_DATA_PATH = "MyData/ISM"
-CRYPTO_DATA_PATH = "MyData/crypto"
-OIL_DATA_PATH = "MyData/oil"
+from . import IRAN_STOCK_DATA_PATH, CRYPTO_DATA_PATH, OIL_DATA_PATH
 
 
 def download_and_save_all_iran_sotck_data():
@@ -23,16 +20,17 @@ def download_and_save__iran_stock_index():
     )
 
 
-def download_crypto_daily(coin_symbol:str) -> pd.DataFrame:
+def download_crypto_daily(coin_symbol: str) -> pd.DataFrame:
     yfin.pdr_override()
 
     return pdr.get_data_yahoo(coin_symbol, start="2020-01-01", end="2023-12-01")
 
 
-def download_and_save_crypto_daily(coin_symbol:str):
+def download_and_save_crypto_daily(coin_symbol: str):
     data = download_crypto_daily(coin_symbol)
     data.to_csv(f"{CRYPTO_DATA_PATH}/BTCUSD.csv")
     return data
+
 
 def download_brent_crude_oil_daily() -> pd.DataFrame:
     yfin.pdr_override()
@@ -43,4 +41,5 @@ def download_brent_crude_oil_daily() -> pd.DataFrame:
 def download_and_save_brent_crude_oil_daily():
     data = download_brent_crude_oil_daily()
     data.to_csv(f"{OIL_DATA_PATH}/BR.csv")
+    print(data)
     return data

@@ -1,6 +1,4 @@
-MyData/ISM/*
-MyData/forexFactory/**.csv
-MyData/crypto/**.csv
+MyData/**/**.csv
 
 
 # Byte-compiled / optimized / DLL files
