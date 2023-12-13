@@ -9,19 +9,20 @@ from MyData.read import (
 from MyData.download import download_and_save_all_iran_sotck_data
 
 from analysis.indicator import SmallDataFilter
+from analysis.filters.funds import filter_not_Funds
 from chart.randomForest import plot_df
 import pandas as pd
 from tqdm import tqdm
 from strategy.startegy1.main import get_indicator_filtered_stocks
 
-N = 0.80
+N = 70  # in precent
 
 
 def run(download_data=False, plot_data=False):
     if download_data:
         download_and_save_all_iran_sotck_data()
 
-    dfs = read_all_iran_stocks()
+    dfs = read_sample_iran_stocks()
 
     scores = filter_with_rf(dfs, plot_data)
     scores_dict = {
@@ -30,8 +31,9 @@ def run(download_data=False, plot_data=False):
     }
 
     datas = get_indicator_filtered_stocks(scores_dict)
-    print(datas.keys())
-    return scores
+
+    datas = filter_not_Funds(datas)
+    print(datas)
 
 
 def filter_with_rf(dfs, plot_data):
@@ -58,5 +60,5 @@ def filter_with_rf(dfs, plot_data):
     print("Std of scores: ", scores.score.std())
 
     if plot_data:
-        plot_df(scores, N * 100)
-    return scores
+        plot_df(scores, N)
+    return scores[scores.score > N]
