@@ -24,6 +24,10 @@ def read_sample_iran_stocks() -> dict[pd.DataFrame]:
     }
 
 
+def read_list_of_stocks(stocks: list[str]) -> dict[pd.DataFrame]:
+    return {stock_name: read_iran_stock_as_pandas(stock_name) for stock_name in stocks}
+
+
 def read_iran_main_stock_index(_from="2020") -> pd.DataFrame:
     df = pd.read_csv(f"{IRAN_STOCK_DATA_PATH}/شاخص كل.csv")
     df.set_index(pd.DatetimeIndex(df["date"]), inplace=True)

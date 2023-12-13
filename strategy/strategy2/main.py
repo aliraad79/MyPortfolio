@@ -1,21 +1,40 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from MyData.read import read_all_iran_stocks
+from MyData.read import (
+    read_all_iran_stocks,
+    read_list_of_stocks,
+    read_iran_stock_as_pandas,
+    read_sample_iran_stocks,
+)
 from MyData.download import download_and_save_all_iran_sotck_data
 
 from analysis.indicator import SmallDataFilter
 from chart.randomForest import plot_df
 import pandas as pd
 from tqdm import tqdm
+from strategy.startegy1.main import get_indicator_filtered_stocks
 
 N = 0.80
 
 
-def main(download_data=False):
+def run(download_data=False, plot_data=False):
     if download_data:
         download_and_save_all_iran_sotck_data()
+
     dfs = read_all_iran_stocks()
 
+    scores = filter_with_rf(dfs, plot_data)
+    scores_dict = {
+        i["name"]: read_iran_stock_as_pandas(i["name"])
+        for i in scores.to_dict("records")
+    }
+
+    datas = get_indicator_filtered_stocks(scores_dict)
+    print(datas.keys())
+    return scores
+
+
+def filter_with_rf(dfs, plot_data):
     small_data_fil = SmallDataFilter()
     small_data_filtred = small_data_fil.filter(dfs)
 
@@ -38,4 +57,6 @@ def main(download_data=False):
     print("Mean of scores: ", scores.score.mean())
     print("Std of scores: ", scores.score.std())
 
-    plot_df(scores, N * 100)
+    if plot_data:
+        plot_df(scores, N * 100)
+    return scores
