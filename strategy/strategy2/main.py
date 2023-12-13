@@ -11,8 +11,9 @@ from tqdm import tqdm
 N = 0.80
 
 
-def main():
-    download_and_save_all_iran_sotck_data()
+def main(download_data=False):
+    if download_data:
+        download_and_save_all_iran_sotck_data()
     dfs = read_all_iran_stocks()
 
     small_data_fil = SmallDataFilter()
