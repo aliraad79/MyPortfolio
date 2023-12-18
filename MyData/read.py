@@ -5,8 +5,9 @@ from . import IRAN_STOCK_DATA_PATH, CRYPTO_DATA_PATH, OIL_DATA_PATH
 
 def read_iran_stock_as_pandas(stock_name_csv_file, _from="2020") -> pd.DataFrame:
     df = pd.read_csv(f"{IRAN_STOCK_DATA_PATH}/{stock_name_csv_file}")
-    df.set_index(pd.DatetimeIndex(df["date"]), inplace=True)
+    df.set_index(pd.to_datetime(df["date"]), inplace=True)
     df = df[["close", "open", "high", "low", "volume"]]
+    df = df[~df.index.duplicated(keep="first")]
     return df[_from:]
 
 
@@ -14,6 +15,13 @@ def read_all_iran_stocks() -> dict[pd.DataFrame]:
     return {
         stock_name: read_iran_stock_as_pandas(stock_name)
         for stock_name in os.listdir(IRAN_STOCK_DATA_PATH)
+    }
+
+
+def read_all_iran_stocks_close_as_pandas_sample() -> dict[pd.DataFrame]:
+    return {
+        stock_name.replace(".csv", ""): read_iran_stock_as_pandas(stock_name).close
+        for stock_name in os.listdir(IRAN_STOCK_DATA_PATH)[:50]
     }
 
 
