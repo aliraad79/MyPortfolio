@@ -1,9 +1,9 @@
-from MyData import download, read
+from MyData.read import read, Instrument
 from analysis.indicator import SmallDataFilter, SMAFilter, IchimokuFilter, ADXFilter
 
 # download.download_and_save_all_iran_sotck_data()
 
-all_stock = read.read_all_iran_stocks()
+all_stock = read(Instrument.ALL)
 
 # Start chain of filters
 small_data_fil = SmallDataFilter()

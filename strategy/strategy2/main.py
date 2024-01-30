@@ -1,12 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from MyData.read import (
-    read_all_iran_stocks,
-    read_list_of_stocks,
-    read_iran_stock_as_pandas,
-    read_sample_iran_stocks,
-)
-from MyData.download import download_and_save_all_iran_sotck_data
+from MyData.read import read, Instrument
+from MyData.download import download, Instrument
 
 from analysis.indicator import SmallDataFilter
 from analysis.filters.funds import filter_not_Funds
@@ -20,14 +15,13 @@ N = 70  # in precent
 
 def run(download_data=False, plot_data=False):
     if download_data:
-        download_and_save_all_iran_sotck_data()
+        download(Instrument.STOCK_ALL)
 
-    dfs = read_sample_iran_stocks()
+    dfs = read(Instrument.STOCK_ALL)[:50]
 
     scores = filter_with_rf(dfs, plot_data)
     scores_dict = {
-        i["name"]: read_iran_stock_as_pandas(i["name"])
-        for i in scores.to_dict("records")
+        i["name"]: read(Instrument.STOCK, i["name"]) for i in scores.to_dict("records")
     }
 
     datas = get_indicator_filtered_stocks(scores_dict)

@@ -1,11 +1,10 @@
-from MyData import read
+from MyData.read import read, Instrument
 from analysis.pattern.pattern import find_patterns
 from chart.pattern import plot_df_with_pattern
 import pandas as pd
 import numpy as np
 
-
-df = read.read_iran_stock_as_pandas("وتجارت")["2021":]
+df = read(Instrument.STOCK, "وتجارت")["2021":]
 
 prices = pd.Series(data=df["close"].values)
 prices.index = np.linspace(1, len(prices), len(prices))
@@ -17,9 +16,7 @@ patterns = find_patterns(prices)
 
 for name, lis in patterns.items():
     print(f"For pattern {name}")
-    
+
     pattern_points = [(dates.iloc[int(j[0])], dates.iloc[int(j[1])]) for j in lis]
-    
+
     plot_df_with_pattern(df, pattern_points)
-
-

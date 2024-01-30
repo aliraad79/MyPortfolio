@@ -1,5 +1,6 @@
-from MyData import download,read
+from MyData.read import read, Instrument
+from MyData.download import download, Instrument
 
-download.download_and_save_brent_crude_oil_daily()
-df = read.read_brent_crude_oil_daily()
+download(Instrument.OIL)
+df = read(Instrument.OIL)
 print(df)

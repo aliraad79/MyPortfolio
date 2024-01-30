@@ -2,12 +2,15 @@ from analysis.dependence.regression import regress
 from MyData import read
 import pandas as pd
 import numpy as np
+from MyData.read import read, Instrument
 
-stock = read.read_iran_stock_as_pandas("وتجارت")["close"]
+stock = read(Instrument.STOCK, "وتجارت")["close"]
 
 rf_df = pd.Series(data=np.repeat(0.0216, len(stock)), index=stock.index)
 
-stock_excess_return = pd.DataFrame(data=stock.pct_change() - rf_df, index=stock.index, columns=["stock_excess"]).dropna()
+stock_excess_return = pd.DataFrame(
+    data=stock.pct_change() - rf_df, index=stock.index, columns=["stock_excess"]
+).dropna()
 
 main_index = read.read_iran_main_stock_index()["close"].pct_change().dropna()
 main_index_excess = pd.DataFrame(

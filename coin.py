@@ -1,9 +1,9 @@
-from MyData.download import download_and_save_crypto_daily
-from MyData.read import read_crypto_data
+from MyData.download import download, Instrument
+from MyData.read import read, Instrument
 
 
-download_and_save_crypto_daily("BTC-USD")
+download(Instrument.CRYPTO, "BTC-USD")
 
-data = read_crypto_data("BTCUSD")
+data = read(Instrument.CRYPTO, "BTC-USD")
 
 print(data)

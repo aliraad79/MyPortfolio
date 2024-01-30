@@ -1,7 +1,8 @@
-from MyData.read import read_all_iran_stocks_close_as_pandas_sample
+from MyData.read import read, Instrument
 import pandas as pd
 import numpy as np
 from analysis.indicator.small_data_filter import SmallDataFilter
+from analysis.rl.train import train
 
 def pre_process_data(dfs):
     small_data_fil = SmallDataFilter()
@@ -15,7 +16,8 @@ def pre_process_data(dfs):
 
 
 def run():
-    dfs = read_all_iran_stocks_close_as_pandas_sample()
+    dfs = read(Instrument.ALL)[:50]
     stocks_returns = pre_process_data(dfs)
 
-    print(stocks_returns)
+    train(stocks_returns)
+
