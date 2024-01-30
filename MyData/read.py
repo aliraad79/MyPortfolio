@@ -15,6 +15,7 @@ def read_all_iran_stocks() -> dict[pd.DataFrame]:
     return {
         stock_name: read_iran_stock_as_pandas(stock_name)
         for stock_name in os.listdir(IRAN_STOCK_DATA_PATH)
+        if stock_name != ".keep"
     }
 
 
