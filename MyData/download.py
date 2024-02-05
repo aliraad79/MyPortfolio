@@ -1,23 +1,28 @@
-from pytse_client import download, download_financial_indexes
+from pytse_client import download as pytse_download, download_financial_indexes
 import pandas_datareader.data as pdr
 import yfinance as yfin
 import pandas as pd
 from .instrument import Instrument
 
-from . import IRAN_STOCK_DATA_PATH, CRYPTO_DATA_PATH, OIL_DATA_PATH
+from . import IRAN_STOCK_DATA_PATH, CRYPTO_DATA_PATH, OIL_DATA_PATH, IRAN_STOCK_INDEX_PATH
 
 
 def download_and_save_all_iran_sotck_data():
-    download("all", write_to_csv=True, base_path=IRAN_STOCK_DATA_PATH)
+    pytse_download("all", write_to_csv=True, base_path=IRAN_STOCK_DATA_PATH)
 
 
 def download_and_save_iran_sotck(stock_name):
-    download(stock_name, write_to_csv=True, base_path=IRAN_STOCK_DATA_PATH)
+    pytse_download(stock_name, write_to_csv=True, base_path=IRAN_STOCK_DATA_PATH)
 
 
 def download_and_save_iran_stock_index():
     download_financial_indexes(
-        symbols="شاخص کل", write_to_csv=True, base_path=IRAN_STOCK_DATA_PATH
+        symbols="شاخص کل", write_to_csv=True, base_path=IRAN_STOCK_INDEX_PATH
+    )
+
+def download_and_save_all_iran_stock_index():
+    download_financial_indexes(
+        symbols="all", write_to_csv=True, base_path=IRAN_STOCK_INDEX_PATH
     )
 
 
@@ -72,8 +77,10 @@ def download(instrument: Instrument, *args):
             return download_and_save_all_iran_sotck_data()
         case Instrument.STOCK:
             return download_and_save_iran_sotck(args[0])
-        case Instrument.STOCK_INDEX:
+        case Instrument.STOCK_MAIN_INDEX:
             return download_and_save_iran_stock_index()
+        case Instrument.STOCK_ALL_INDICIES:
+            return download_and_save_all_iran_stock_index()
         case Instrument.CRYPTO:
             return download_and_save_crypto_daily(args[0])
         case Instrument.OIL:

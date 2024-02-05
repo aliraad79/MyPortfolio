@@ -31,7 +31,7 @@ class IndicatorFilter(ABC):
                 target_stocks[target_stock[0]] = target_stock[1]
             except:
                 if self.verbose:
-                    print(f"{stock_name} has raise exception. len={len(stock_name)}")
+                    print(f"{stock_name} has raise exception. len={len(df)}")
 
         if self._next_handler:
             return self._next_handler.filter(target_stocks)
