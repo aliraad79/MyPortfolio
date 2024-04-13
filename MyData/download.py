@@ -29,7 +29,7 @@ def download_and_save_all_iran_stock_index():
 def download_crypto_daily(coin_symbol: str) -> pd.DataFrame:
     yfin.pdr_override()
 
-    return pdr.get_data_yahoo(coin_symbol, start="2020-01-01", end="2023-12-01")
+    return pdr.get_data_yahoo(coin_symbol, start="2017-01-01", end="2024-03-02")
 
 
 def download_and_save_crypto_daily(coin_symbol: str):

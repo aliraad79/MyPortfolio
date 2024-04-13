@@ -1,9 +1,11 @@
 from MyData.read import read, Instrument
+from MyData.download import download
+from util.cli_utils import print_csv_list_stock_name
 from analysis.indicator import SmallDataFilter, SMAFilter, IchimokuFilter, ADXFilter
 
-# download.download_and_save_all_iran_sotck_data()
+# download(Instrument.STOCK_ALL)
 
-all_stock = read(Instrument.ALL)
+all_stock = read(Instrument.STOCK_ALL)
 
 # Start chain of filters
 small_data_fil = SmallDataFilter()
@@ -19,4 +21,4 @@ adx_fil = ADXFilter()
 adx_filtered = adx_fil.filter(ichi_filtered)
 
 
-print(adx_filtered.keys())
+print_csv_list_stock_name(adx_filtered.keys())
